@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoFilter</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" style="height: 100vh;">
+        <h1 class="text-center">PhotoFilter</h1>
+        <div class="row" style="height: 90%;">
+            <div class="col-1 side-bar">
+                <p class="text-white">Filters</p>
+                <div class="d-flex flex-column" style="height: 15%; width: 100%;">
+                    <button type="button" style="height: 50px;" class="btn btn-secondary" onclick="apply_filter('original')" id="filter-btn"></button>
+                    <p class="text-white text-center">original</p>
+                </div>
+                <div class="d-flex flex-column" style="height: 15%; width: 100%;">
+                    <button type="button" style="height: 50px;" class="btn btn-secondary" onclick="apply_filter('gray')" id="filter-btn"></button>
+                    <p class="text-white text-center">gray</p>
+                </div>
+                <div class="d-flex flex-column" style="height: 15%; width: 100%;">
+                    <button type="button" style="height: 80px;" class="btn btn-secondary" onclick="apply_filter('threshold')" id="filter-btn"></button>
+                    <p class="text-white text-center">thresh</p>
+                </div>
+                <div class="d-flex flex-column" style="height: 15%; width: 100%;">
+                    <button type="button" style="height: 50%;" class="btn btn-secondary" onclick="apply_filter('canny')" id="filter-btn"></button>
+                    <p class="text-white text-center">canny</p>
+                </div>
+                <div class="d-flex flex-column" style="height: 15%; width: 100%;">
+                    <button type="button" style="height: 50%;" class="btn btn-secondary" onclick="apply_filter('blur')" id="filter-btn"></button>
+                    <p class="text-white text-center">blur</p>
+                </div>
+            </div>
+            <div class="col-11 pic-main-div d-flex flex-column">
+                <div class="d-flex justify-content-end">
+                    <form action="/process" method="post" enctype="multipart/form-data" class="d-flex gap-10">
+                        <input class="form-control" type="file" name="file" id="file">
+                        <button type="submit" class="btn btn-secondary">Apply</button>
+                    </form>
+                </div>
+                <div class="pic-div">
+                    {% if img_path %}
+                        <img src="{{img_path}}" alt="" class="image">
+                    {% else %}
+                        <img src="{{url_for('static',filename='img/photo-1837.svg')}}" alt="" class="image">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{url_for('static',filename='js/script.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
